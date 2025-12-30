@@ -3,7 +3,6 @@ from lettings.models import Address, Letting  # noqa: F401
 from profiles.models import Profile  # noqa: F401
 
 
-
 # from django.db import models
 # from django.core.validators import MaxValueValidator, MinLengthValidator
 # from django.contrib.auth.models import User
