@@ -1,5 +1,7 @@
-from django.urls import path
+"""
+Module de gestion des URLs pour l'application profiles"""
 
+from django.urls import path
 from . import views
 
 app_name = "profiles"

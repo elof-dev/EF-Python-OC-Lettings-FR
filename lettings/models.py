@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Address(models.Model):
+    """Modèle représentant une adresse"""
+
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
@@ -13,12 +15,30 @@ class Address(models.Model):
     )
 
     def __str__(self):
+        """Représentation en chaîne de caractères de l'adresse
+        utilisé dans l'admin Django"""
         return f"{self.number} {self.street}"
+
+    class Meta:
+        """Meta données pour le modèle Address"""
+
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
 
 
 class Letting(models.Model):
+    """Modèle représentant un letting"""
+
     title = models.CharField(max_length=256)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
     def __str__(self):
+        """Représentation en chaîne de caractères du letting
+        utilisé dans l'admin Django"""
         return self.title
+
+    class Meta:
+        """Meta données pour le modèle Letting"""
+
+        verbose_name = "Letting"
+        verbose_name_plural = "Lettings"

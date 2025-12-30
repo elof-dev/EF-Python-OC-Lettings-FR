@@ -1,6 +1,7 @@
+"""Module de gestion des URLs pour le site oc_lettings_site"""
+
 from django.contrib import admin
 from django.urls import include, path
-
 from . import views
 
 urlpatterns = [
