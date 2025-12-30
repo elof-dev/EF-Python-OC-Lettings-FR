@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Erreur serveur (500) {% endblock %}
+
+{% block content %}
+<div class="container px-5 py-5 text-center">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="display-6">Erreur serveur (500)</h1>
+      <p>Une erreur interne est survenue. Veuillez réessayer plus tard.</p>
+      <p>
+        <a class="btn btn-primary me-2" href="{% url 'index' %}">Retour à l'accueil</a>
+        <a class="btn btn-outline-secondary" href="#" onclick="history.back(); return false;">Revenir à la page précédente</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
