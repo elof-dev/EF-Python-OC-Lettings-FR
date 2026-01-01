@@ -30,6 +30,9 @@ class Letting(models.Model):
     """Modèle représentant un letting"""
 
     title = models.CharField(max_length=256)
+    # Relation OneToOne avec le modèle Address : donc 1 letting a 1 adresse
+    # Si un jour on veut réutiliser une adresse pour plusieurs lettings,
+    # il faudra changer ce champ en ForeignKey
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
     def __str__(self):
