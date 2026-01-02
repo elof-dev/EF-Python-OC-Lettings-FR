@@ -1,12 +1,12 @@
 # récupération de l'image officielle de Python 3.10 allégée
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements-prod.txt .
 RUN pip install --upgrade pip && pip install -r requirements-prod.txt
 
 # Copie des fichiers de l'application dans le conteneur
