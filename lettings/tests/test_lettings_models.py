@@ -1,12 +1,12 @@
 """Module de tests pour les modèles de l'application lettings"""
 
-
 from django.test import TestCase
 from lettings.models import Address, Letting
 
 
 class TestLettingsModels(TestCase):
     """Tests pour les modèles de l'application lettings"""
+
     def _create_address(self) -> Address:
         """Fonction utilitaire pour créer une adresse de test"""
         return Address.objects.create(

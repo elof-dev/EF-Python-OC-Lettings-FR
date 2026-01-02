@@ -8,6 +8,7 @@ from profiles import views
 
 class TestProfilesUrls(TestCase):
     """Tests pour les URLs de l'application profiles"""
+
     def test_index_reverse(self):
         """Vérifie que la fonction reverse génère la bonne URL pour la page d'index"""
         index_url = reverse("profiles:index")
@@ -24,7 +25,7 @@ class TestProfilesUrls(TestCase):
         self.assertEqual(profiles_page.func, views.index)
 
     def test_profile_resolves_to_profile_view(self):
-        """Vérifie que la résolution de l'URL /profiles/HeadlinesGazer/ correspond à la vue profile"""
+        """Vérifie la résolution de l'URL /profiles/HeadlinesGazer/ correspond à la vue profile"""
         profile_page = resolve("/profiles/HeadlinesGazer/")
         self.assertEqual(profile_page.func, views.profile)
 

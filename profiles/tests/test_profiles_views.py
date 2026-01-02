@@ -9,6 +9,7 @@ from profiles.models import Profile
 
 class TestProfilesViews(TestCase):
     """Tests pour les vues de l'application profiles"""
+
     def test_index_returns_200_and_uses_template(self):
         """Vérifie que la vue index renvoie un code de statut 200 et utilise le bon template"""
         response = self.client.get(reverse("profiles:index"))
@@ -37,7 +38,7 @@ class TestProfilesViews(TestCase):
         self.assertEqual(response.context["profile"], profile)
 
     def test_profile_view_returns_404_when_user_unknown(self):
-        """Vérifie que la vue profile renvoie un code de statut 404 lorsque l'utilisateur est inconnu"""
+        """Vérifie que la vue profile renvoie statut code 404 lorsque l'utilisateur est inconnu"""
         response = self.client.get(
             reverse("profiles:profile", kwargs={"username": "unknown"})
         )

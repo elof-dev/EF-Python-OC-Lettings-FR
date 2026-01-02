@@ -5,3 +5,4 @@ six==1.17.0
 python-dotenv==1.2.1
 coverage==7.11.2
 pytest-cov
+sentry-sdk[django]==2.48.0

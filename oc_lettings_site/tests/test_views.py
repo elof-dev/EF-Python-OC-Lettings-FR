@@ -2,7 +2,6 @@
 Module de tests pour les vues du site oc_lettings_site
 Objectif : vérifier que la vue renvoie le bon template et le bon code de statut"""
 
-
 from django.test import TestCase
 from django.urls import reverse
 

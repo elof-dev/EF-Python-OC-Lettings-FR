@@ -8,6 +8,7 @@ from lettings.models import Address, Letting
 
 class TestLettingsViews(TestCase):
     """Tests pour les vues de l'application lettings"""
+
     def _create_letting(self) -> Letting:
         """Fonction utilitaire pour créer un objet Letting avec une adresse associée"""
         address = Address.objects.create(
@@ -47,6 +48,8 @@ class TestLettingsViews(TestCase):
         self.assertEqual(response.context["address"], letting.address)
 
     def test_letting_view_returns_404_when_unknown(self):
-        """Vérifie que la vue letting renvoie un code de statut 404 lorsque le letting est inconnu"""
-        response = self.client.get(reverse("lettings:letting", kwargs={"letting_id": 9999}))
+        """Vérifie que la vue letting renvoie un statut code 404 lorsque le letting est inconnu"""
+        response = self.client.get(
+            reverse("lettings:letting", kwargs={"letting_id": 9999})
+        )
         self.assertEqual(response.status_code, 404)
