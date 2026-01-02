@@ -76,5 +76,5 @@ jobs:
           context: .
           push: true
           tags: |
-            elodie783/python-oc-lettings-fr:latest
-            elodie783/python-oc-lettings-fr:${{ github.sha }}
+            elodie783/ef-oc-lettings-fr:latest
+            elodie783/ef-oc-lettings-fr:${{ github.sha }}
