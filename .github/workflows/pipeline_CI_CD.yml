@@ -50,3 +50,31 @@ jobs:
 
       - name: Run tests with coverage
         run: pytest --cov=. --cov-report=term-missing --cov-fail-under=80
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: tests
+    # ne s'exécute que sur la branche master
+    if: github.ref == 'refs/heads/master'
+    steps:
+      # étapes du job : checkout, login to Docker Hub, build and push Docker image
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            elodie783/python-oc-lettings-fr:latest
+            elodie783/python-oc-lettings-fr:${{ github.sha }}
