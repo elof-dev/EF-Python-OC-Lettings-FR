@@ -1,5 +1,5 @@
 # récupération de l'image officielle de Python 3.10 allégée
-FROM python:3.10-slim
+FROM python:3.8-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
