@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 class TestsOcLettingsViews(TestCase):
     """Tests pour les vues de l'application oc_lettings_site."""
+
     def test_index_returns_200(self):
         """Vérifie que la vue index renvoie un code de statut 200."""
         response = self.client.get(reverse("index"))

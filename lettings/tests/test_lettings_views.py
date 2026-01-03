@@ -57,7 +57,9 @@ class TestLettingsViews(TestCase):
 
     def test_index_raises_when_db_query_fails(self):
         """Vérifie que la vue index lève une exception lorsque la requête DB échoue"""
-        with patch("lettings.views.Letting.objects.all", side_effect=Exception("crash db")):
+        with patch(
+            "lettings.views.Letting.objects.all", side_effect=Exception("crash db")
+        ):
             with self.assertRaises(Exception):
                 self.client.get(reverse("lettings:index"))
 

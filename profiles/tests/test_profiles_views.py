@@ -47,7 +47,9 @@ class TestProfilesViews(TestCase):
 
     def test_index_raises_when_db_query_fails(self):
         """Vérifie que la vue index lève une exception lorsque la requête DB échoue"""
-        with patch("profiles.views.Profile.objects.all", side_effect=Exception("crash db")):
+        with patch(
+            "profiles.views.Profile.objects.all", side_effect=Exception("crash db")
+        ):
             with self.assertRaises(Exception):
                 self.client.get(reverse("profiles:index"))
 
@@ -55,4 +57,6 @@ class TestProfilesViews(TestCase):
         """Vérifie que la vue profile lève une exception lors d'une erreur inattendue"""
         with patch("profiles.views.get_object_or_404", side_effect=Exception("crash")):
             with self.assertRaises(Exception):
-                self.client.get(reverse("profiles:profile", kwargs={"username": "elodie"}))
+                self.client.get(
+                    reverse("profiles:profile", kwargs={"username": "elodie"})
+                )
