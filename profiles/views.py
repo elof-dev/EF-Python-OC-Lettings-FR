@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Profile
+import logging
+from django.http import Http404
+
+logger = logging.getLogger(__name__)
 
 
 # Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex, sed consequat libero
@@ -12,9 +16,13 @@ def index(request):
     les place dans le contexte sous la clé 'profiles_list',
     et rend le template 'profiles/index.html' avec ce contexte.
     """
-    profiles_list = Profile.objects.all()
-    context = {"profiles_list": profiles_list}
-    return render(request, "profiles/index.html", context)
+    try:
+        profiles_list = Profile.objects.all()
+        context = {"profiles_list": profiles_list}
+        return render(request, "profiles/index.html", context)
+    except Exception:
+        logger.exception("Erreur lors du rendu de la page d'accueil des profils")
+        raise
 
 
 # Aliquam sed metus eget nisi tincidunt ornare accumsan eget lac laoreet neque quis, pellentesque
@@ -28,6 +36,17 @@ def profile(request, username):
     le place dans le contexte sous la clé 'profile',
     Rend le template 'profiles/profile.html'.
     """
-    profile = get_object_or_404(Profile, user__username=username)
-    context = {"profile": profile}
+    try:
+        profile_obj = get_object_or_404(Profile, user__username=username)
+    except Http404:
+        logger.warning("Profil non trouvé", extra={"username": username})
+        raise
+    except Exception:
+        logger.exception(
+            "Erreur inattendue lors du chargement du profil",
+            extra={"username": username},
+        )
+        raise
+
+    context = {"profile": profile_obj}
     return render(request, "profiles/profile.html", context)

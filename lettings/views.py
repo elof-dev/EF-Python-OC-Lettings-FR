@@ -1,5 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Letting
+import logging
+from django.http import Http404
+
+
+logger = logging.getLogger(__name__)
 
 
 # Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis velit. Sed non placerat
@@ -12,9 +17,13 @@ def index(request):
     les place dans le contexte sous la clé 'lettings_list',
     Rend le template 'index.html'.
     """
-    lettings_list = Letting.objects.all()
-    context = {"lettings_list": lettings_list}
-    return render(request, "lettings/index.html", context)
+    try:
+        lettings_list = Letting.objects.all()
+        context = {"lettings_list": lettings_list}
+        return render(request, "lettings/index.html", context)
+    except Exception:
+        logger.exception("Erreur lors du rendu de la page d'accueil des lettings")
+        raise
 
 
 # Cras ultricies dignissim purus, vitae hendrerit ex varius non. In accumsan porta nisl id
@@ -33,9 +42,16 @@ def letting(request, letting_id):
     le place dans le contexte sous la clé 'letting',
     Rend le template 'letting.html'.
     """
-    letting = get_object_or_404(Letting, id=letting_id)
-    context = {
-        "title": letting.title,
-        "address": letting.address,
-    }
+    try:
+        letting_obj = get_object_or_404(Letting, id=letting_id)
+    except Http404:
+        logger.warning("Letting not found", extra={"letting_id": letting_id})
+        raise
+    except Exception:
+        logger.exception(
+            "Erreur lors du chargement du letting", extra={"letting_id": letting_id}
+        )
+        raise
+
+    context = {"title": letting_obj.title, "address": letting_obj.address}
     return render(request, "lettings/letting.html", context)

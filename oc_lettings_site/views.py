@@ -1,4 +1,8 @@
 from django.shortcuts import render
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 # Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam lobortis leo
@@ -12,4 +16,8 @@ def index(request):
     Affiche la page d'accueil du site.
     Rend le template 'index.html'.
     """
-    return render(request, "index.html")
+    try:
+        return render(request, "index.html")
+    except Exception:
+        logger.exception("Erreur lors du rendu de la page d'accueil")
+        raise
