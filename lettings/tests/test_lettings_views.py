@@ -2,6 +2,7 @@
 
 from django.test import TestCase
 from django.urls import reverse
+from unittest.mock import patch
 
 from lettings.models import Address, Letting
 
@@ -53,3 +54,15 @@ class TestLettingsViews(TestCase):
             reverse("lettings:letting", kwargs={"letting_id": 9999})
         )
         self.assertEqual(response.status_code, 404)
+
+    def test_index_raises_when_db_query_fails(self):
+        """Vérifie que la vue index lève une exception lorsque la requête DB échoue"""
+        with patch("lettings.views.Letting.objects.all", side_effect=Exception("crash db")):
+            with self.assertRaises(Exception):
+                self.client.get(reverse("lettings:index"))
+
+    def test_letting_raises_on_unexpected_error(self):
+        """Vérifie que la vue letting lève une exception lors d'une erreur inattendue"""
+        with patch("lettings.views.get_object_or_404", side_effect=Exception("crash")):
+            with self.assertRaises(Exception):
+                self.client.get(reverse("lettings:letting", kwargs={"letting_id": 1}))

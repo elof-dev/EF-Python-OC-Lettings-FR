@@ -3,6 +3,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from unittest.mock import patch
 
 from profiles.models import Profile
 
@@ -43,3 +44,15 @@ class TestProfilesViews(TestCase):
             reverse("profiles:profile", kwargs={"username": "unknown"})
         )
         self.assertEqual(response.status_code, 404)
+
+    def test_index_raises_when_db_query_fails(self):
+        """Vérifie que la vue index lève une exception lorsque la requête DB échoue"""
+        with patch("profiles.views.Profile.objects.all", side_effect=Exception("crash db")):
+            with self.assertRaises(Exception):
+                self.client.get(reverse("profiles:index"))
+
+    def test_profile_raises_on_unexpected_error(self):
+        """Vérifie que la vue profile lève une exception lors d'une erreur inattendue"""
+        with patch("profiles.views.get_object_or_404", side_effect=Exception("crash")):
+            with self.assertRaises(Exception):
+                self.client.get(reverse("profiles:profile", kwargs={"username": "elodie"}))
