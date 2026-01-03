@@ -5,7 +5,6 @@ Une fois l’application installée :
 
 1. Lancer le serveur Django
 2. Accéder au site via http://127.0.0.1:8000
-3. Naviguer entre les annonces et les profils
 
 Création d’un compte administrateur :
 

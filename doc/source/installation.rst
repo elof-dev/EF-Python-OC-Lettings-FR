@@ -15,8 +15,8 @@ Cloner le dépôt :
 
 .. code-block:: bash
 
-   git clone https://github.com/<utilisateur>/Python-OC-Lettings-FR.git
-   cd Python-OC-Lettings-FR
+   git clone https://github.com/elof-dev/EF-Python-OC-Lettings-FR.git
+   cd EF-Python-OC-Lettings-FR
 
 Créer un environnement virtuel et installer les dépendances :
 

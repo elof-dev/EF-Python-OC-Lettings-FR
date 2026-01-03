@@ -1,7 +1,7 @@
 Base de données
 ===============
 
-Le projet utilise SQLite en environnement de développement.
+Le projet utilise SQLite
 
 Modèles
 -------

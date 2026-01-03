@@ -7,7 +7,7 @@ Processus
 ---------
 
 1. Push sur la branche master
-2. Exécution des tests et vérification de la couverture
+2. Exécution des tests et vérification de la couverture (doit être supérieure à 80%)
 3. Construction de l’image Docker
 4. Déploiement automatique sur Render
 

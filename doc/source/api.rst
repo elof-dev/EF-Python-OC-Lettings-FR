@@ -1,12 +1,10 @@
 Interfaces de programmation
 ===========================
 
-L’application expose des routes HTTP gérées par Django.
-
-Exemples de routes
-------------------
+L’application expose les routes suivantes
 
 - / : page d’accueil
 - /lettings/ : liste des annonces
 - /profiles/ : liste des profils
 - /admin/ : interface d’administration
+
