@@ -4,6 +4,7 @@ from sentry_sdk import capture_message
 
 logger = logging.getLogger(__name__)
 
+
 class Capture404Middleware:
     def __init__(self, get_response):
         self.get_response = get_response

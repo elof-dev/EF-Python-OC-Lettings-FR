@@ -1,6 +1,5 @@
 import os
 import sentry_sdk
-import logging
 from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 from dotenv import load_dotenv

@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements-prod.txt .
+COPY requirements.txt requirements-prod.txt ./
 RUN pip install --upgrade pip && pip install -r requirements-prod.txt
 
 # Copie des fichiers de l'application dans le conteneur
