@@ -4,6 +4,8 @@ from django.contrib import admin
 from django.urls import include, path
 from . import views
 
+# J'ai conservé l'index de base, l'admin et include délègue les URLs aux applications lettings et
+# profiles
 urlpatterns = [
     path("", views.index, name="index"),
     path("lettings/", include(("lettings.urls", "lettings"), namespace="lettings")),
